@@ -1,0 +1,6 @@
+[submodule "blockr-validator"]
+	path = blockr-validator
+	url = https://github.com/ESD6-blockr/blockr-validator.git
+[submodule "blockr-p2p"]
+	path = blockr-p2p
+	url = https://github.com/ESD6-blockr/blockr-p2p.git
