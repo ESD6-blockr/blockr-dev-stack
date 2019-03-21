@@ -1,0 +1,55 @@
+version: '3'
+services:
+  mongodb:
+    build: mongodb
+    container_name: blockr_validator_mongodb
+    networks:
+      - blockr
+        #volumes:
+        # - ./mongodb/data_volume:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=myUserAdmin
+      - MONGO_INITDB_ROOT_PASSWORD=abc123
+    ports:
+      - 27018:27017
+
+  p2p:
+    container_name: blockr_p2p
+    build: blockr-p2p
+    ports:
+      - "8082:8082"
+    networks:
+      - blockr
+
+  validator_main:
+    container_name: blockr_validator_main
+    build: blockr-validator_main
+    ports:
+      - "8000:8000"
+    networks:
+     - blockr
+       #volumes:
+       # - ./blockr-validator_main/database_volume:/app/database
+    restart: always
+
+  validator_backup:
+    container_name: blockr_validator_backup
+    build: blockr-validator_main
+    ports:
+      - "8001:8000"
+    depends_on: 
+      - "validator_main"
+      - "mongodb"
+      - "p2p"
+    networks:
+      - blockr
+    restart: always
+    environment:
+      - IS_BACKUP=true
+      - PUBKEY_ADMIN=5382106441fd16c5cfb35b57ebd5f36e4fd22973d549a56ca189b67f4cda8c49
+      - PRIVKEY_ADMIN=04050000020400010700050400040000000205070901090003020402000003045382106441fd16c5cfb35b57ebd5f36e4fd22973d549a56ca189b67f4cda8c49
+
+networks:
+  blockr:
+    driver: bridge
+
