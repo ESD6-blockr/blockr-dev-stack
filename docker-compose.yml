@@ -23,7 +23,7 @@ services:
 
   validator_main:
     container_name: blockr_validator_main
-    build: blockr-validator_main
+    build: blockr-validator
     ports:
       - "8000:8000"
     networks:
@@ -34,7 +34,7 @@ services:
 
   validator_backup:
     container_name: blockr_validator_backup
-    build: blockr-validator_main
+    build: blockr-validator
     ports:
       - "8001:8000"
     depends_on: 
