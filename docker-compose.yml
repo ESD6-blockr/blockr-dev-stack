@@ -31,6 +31,11 @@ services:
        #volumes:
        # - ./blockr-validator_main/database_volume:/app/database
     restart: always
+    environment:
+      - IS_BACKUP=false
+      - PUBKEY_ADMIN=dabd489642ef9999460f59fe84ed7a7861a25d06a316476b9e0720a9645e221e
+      - PRIVKEY_ADMIN=0100000000040505000309000400000700030000060704080006000005000001dabd489642ef9999460f59fe84ed7a7861a25d06a316476b9e0720a9645e221e
+
 
   validator_backup:
     container_name: blockr_validator_backup
