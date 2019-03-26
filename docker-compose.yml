@@ -2,7 +2,7 @@ version: '3'
 services:
   mongodb:
     build: mongodb
-    container_name: blockr_validator_mongodb
+    container_name: blockr-dev-stack__validator_mongodb
     networks:
       - blockr
         #volumes:
@@ -14,7 +14,7 @@ services:
       - 27018:27017
 
   p2p:
-    container_name: blockr_p2p
+    container_name: blockr-dev-stack_p2p
     build: blockr-p2p
     ports:
       - "8082:8082"
@@ -22,7 +22,7 @@ services:
       - blockr
 
   validator_main:
-    container_name: blockr_validator_main
+    container_name: blockr-dev-stack_validator_main
     build: blockr-validator
     ports:
       - "8000:8000"
@@ -38,7 +38,7 @@ services:
       - P2P_SERVER_IP=p2p
 
   validator_backup:
-    container_name: blockr_validator_backup
+    container_name: blockr-dev-stack_validator_backup
     build: blockr-validator
     ports:
       - "8001:8000"
