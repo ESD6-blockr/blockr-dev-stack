@@ -27,14 +27,14 @@ services:
     ports:
       - "8000:8000"
     networks:
-     - blockr
+      - blockr
+    volumes:
+      - ./blockr-validator_main/keys:/keys
        #volumes:
        # - ./blockr-validator_main/database_volume:/app/database
     restart: always
     environment:
       - IS_BACKUP=false
-      - PUBKEY_ADMIN=dabd489642ef9999460f59fe84ed7a7861a25d06a316476b9e0720a9645e221e
-      - PRIVKEY_ADMIN=0100000000040505000309000400000700030000060704080006000005000001dabd489642ef9999460f59fe84ed7a7861a25d06a316476b9e0720a9645e221e
       - P2P_SERVER_IP=p2p
 
   validator_backup:
@@ -48,11 +48,11 @@ services:
       - "p2p"
     networks:
       - blockr
+    volumes:
+      - ./blockr-validator_backup/keys:/keys
     restart: always
     environment:
       - IS_BACKUP=true
-      - PUBKEY_ADMIN=5382106441fd16c5cfb35b57ebd5f36e4fd22973d549a56ca189b67f4cda8c49
-      - PRIVKEY_ADMIN=04050000020400010700050400040000000205070901090003020402000003045382106441fd16c5cfb35b57ebd5f36e4fd22973d549a56ca189b67f4cda8c49
       - P2P_SERVER_IP=p2p
 networks:
   blockr:
