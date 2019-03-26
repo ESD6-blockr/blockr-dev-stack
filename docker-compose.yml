@@ -27,7 +27,9 @@ services:
     ports:
       - "8000:8000"
     networks:
-     - blockr
+      - blockr
+    volumes:
+      - ./blockr-validator_main/keys:/keys
        #volumes:
        # - ./blockr-validator_main/database_volume:/app/database
     restart: always
@@ -48,6 +50,8 @@ services:
       - "p2p"
     networks:
       - blockr
+    volumes:
+      - ./blockr-validator_backup/keys:/keys
     restart: always
     environment:
       - IS_BACKUP=true
