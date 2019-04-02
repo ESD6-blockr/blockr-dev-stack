@@ -32,7 +32,7 @@ services:
       - ./blockr-validator_main/keys:/keys
        #volumes:
        # - ./blockr-validator_main/database_volume:/app/database
-    restart: always
+    restart: unless-stopped
     environment:
       - IS_BACKUP=false
       - P2P_SERVER_IP=p2p
@@ -50,7 +50,7 @@ services:
       - blockr
     volumes:
       - ./blockr-validator_backup/keys:/keys
-    restart: always
+    restart: unless-stopped
     environment:
       - IS_BACKUP=true
       - P2P_SERVER_IP=p2p
